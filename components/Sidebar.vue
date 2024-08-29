@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import {
-  Package,
-  Package2,
-  ShoppingCart,
-  Users
-} from 'lucide-vue-next'
+import { Package2 } from 'lucide-vue-next'
+import { items } from '~/data'
 </script>
 
 <template>
@@ -13,43 +9,33 @@ import {
       <div
         class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6"
       >
-        <a
-          href="/"
+        <NuxtLink
+          to="/"
           class="flex items-center gap-2 font-semibold"
         >
           <Package2 class="h-6 w-6" />
 
           <span class="">Acme Inc</span>
-        </a>
+        </NuxtLink>
       </div>
 
       <div class="flex-1">
         <nav
           class="grid items-start px-2 text-sm font-medium lg:px-4"
         >
-          <a
-            href="#"
+          <NuxtLink
+            v-for="item in items"
+            :key="item.url"
+            :to="item.url"
             class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            active-class="bg-muted"
           >
-            <ShoppingCart class="h-4 w-4" />
-            Vendedor
-          </a>
-
-          <a
-            href="#"
-            class="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-          >
-            <Package class="h-4 w-4" />
-            Productos
-          </a>
-
-          <a
-            href="#"
-            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            <Users class="h-4 w-4" />
-            Clientes
-          </a>
+            <component
+              :is="item.icon"
+              class="h-4 w-4"
+            />
+            {{ item.label }}
+          </NuxtLink>
         </nav>
       </div>
     </div>

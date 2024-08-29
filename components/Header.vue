@@ -1,13 +1,6 @@
 <script setup lang="ts">
-import {
-  CircleUser,
-  Menu,
-  Package,
-  Package2,
-  Search,
-  ShoppingCart,
-  Users
-} from 'lucide-vue-next'
+import { CircleUser, Menu, Package2, Search } from 'lucide-vue-next'
+import { items } from '~/data'
 import { Button } from './ui/button'
 import {
   DropdownMenu,
@@ -19,6 +12,9 @@ import {
 } from './ui/dropdown-menu'
 import { Input } from './ui/input'
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
+
+const route = useRoute()
+console.log(route.path)
 </script>
 
 <template>
@@ -43,37 +39,28 @@ import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
         class="flex flex-col"
       >
         <nav class="grid gap-2 text-lg font-medium">
-          <a
-            href="#"
+          <NuxtLink
+            to="/"
             class="flex items-center gap-2 text-lg font-semibold"
           >
             <Package2 class="h-6 w-6" />
+
             <span class="sr-only">Acme Inc</span>
-          </a>
+          </NuxtLink>
 
-          <a
-            href="#"
-            class="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
+          <NuxtLink
+            v-for="item in items"
+            :key="item.url"
+            :to="item.url"
+            class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-foreground hover:text-foreground"
+            active-class="bg-muted"
           >
-            <ShoppingCart class="h-5 w-5" />
-            Vendedor
-          </a>
-
-          <a
-            href="#"
-            class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-          >
-            <Package class="h-5 w-5" />
-            Productos
-          </a>
-
-          <a
-            href="#"
-            class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-          >
-            <Users class="h-5 w-5" />
-            Clientes
-          </a>
+            <component
+              :is="item.icon"
+              class="h-5 w-5"
+            />
+            {{ item.label }}
+          </NuxtLink>
         </nav>
       </SheetContent>
     </Sheet>

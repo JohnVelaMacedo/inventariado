@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import Header from '~/components/Header.vue'
 import Sidebar from '~/components/Sidebar.vue'
+import { items } from '~/data'
+
+const route = useRoute()
+const label = computed(() => {
+  const itemData = items.find((item) => item.url === route.path)
+  return itemData?.label ?? 'Inicio'
+})
 </script>
 
 <template>
@@ -13,7 +20,15 @@ import Sidebar from '~/components/Sidebar.vue'
       <Header />
 
       <main class="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-        <slot />
+        <div class="flex items-center">
+          <h1 class="text-lg font-semibold md:text-2xl">
+            {{ label }}
+          </h1>
+        </div>
+
+        <div class="flex flex-1 px-4 rounded-lg border shadow-sm">
+          <slot />
+        </div>
       </main>
     </div>
   </div>

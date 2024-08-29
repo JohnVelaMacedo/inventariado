@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { Button } from '~/components/ui/button'
+</script>
+
 <template>
-  <div>Products</div>
+  <Button class="mt-4"> Add Product </Button>
 </template>
