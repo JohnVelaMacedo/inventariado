@@ -3,5 +3,5 @@ import { Button } from '~/components/ui/button'
 </script>
 
 <template>
-  <Button class="mt-4"> Add Product </Button>
+  <Button class="mt-4">Add Product</Button>
 </template>
