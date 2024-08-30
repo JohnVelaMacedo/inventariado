@@ -28,7 +28,6 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
     cell: ({ row }) => {
       const payment = row.original
-      console.log({ payment })
 
       return h(
         'div',

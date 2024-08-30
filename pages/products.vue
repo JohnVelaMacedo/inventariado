@@ -2,7 +2,9 @@
 import { PlusCircle } from 'lucide-vue-next'
 import { columns, type Payment } from '~/components/products/columns'
 import DataTable from '~/components/products/data-table.vue'
+import ProductDialog from '~/components/products/ProductDialog.vue'
 import { Button } from '~/components/ui/button'
+import { Dialog, DialogTrigger } from '~/components/ui/dialog'
 
 const data = ref<Payment[]>([])
 
@@ -44,16 +46,25 @@ onMounted(async () => {
 
 <template>
   <div class="container py-10 mx-auto">
-    <div class="text-right mb-2">
-      <Button size="sm">
-        <PlusCircle class="h-3.5 w-3.5" />
-        Agregar Producto
-      </Button>
-    </div>
+    <Dialog>
+      <div class="text-right mb-2">
+        <DialogTrigger asChild>
+          <Button
+            size="sm"
+            variant="outline"
+          >
+            <PlusCircle class="h-3.5 w-3.5 mr-2" />
+            Agregar Producto
+          </Button>
+        </DialogTrigger>
+      </div>
 
-    <DataTable
-      :columns="columns"
-      :data="data"
-    />
+      <DataTable
+        :columns="columns"
+        :data="data"
+      />
+
+      <ProductDialog />
+    </Dialog>
   </div>
 </template>
