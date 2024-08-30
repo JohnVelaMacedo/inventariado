@@ -40,6 +40,7 @@ const { isFieldDirty, handleSubmit } = useForm({
 })
 
 const onSubmit = handleSubmit((values) => {
+  // TODO: Hacer una petición POST para guardar
   console.log(values)
   closeButton.value?.click()
 })
@@ -97,11 +98,7 @@ const onSubmit = handleSubmit((values) => {
       </FormField>
 
       <DialogFooter class="flex-col gap-2">
-        <Button
-          type="submit"
-          ref=""
-          >Guardar</Button
-        >
+        <Button type="submit">Guardar</Button>
 
         <DialogClose as-child>
           <button

@@ -14,7 +14,6 @@ import { Input } from './ui/input'
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
 
 const route = useRoute()
-console.log(route.path)
 </script>
 
 <template>

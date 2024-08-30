@@ -34,9 +34,9 @@ const props = defineProps<Props>()
     </DropdownMenuTrigger>
 
     <DropdownMenuContent align="end">
-      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+      <DropdownMenuLabel>Acciones</DropdownMenuLabel>
 
-      <DropdownMenuItem>Editar</DropdownMenuItem>
+      <DropdownMenuItem> Editar </DropdownMenuItem>
 
       <DropdownMenuItem>Eliminar</DropdownMenuItem>
     </DropdownMenuContent>
