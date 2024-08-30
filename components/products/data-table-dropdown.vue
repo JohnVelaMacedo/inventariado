@@ -19,6 +19,10 @@ const props = defineProps<Props>()
 // function copy(id: string) {
 //   navigator.clipboard.writeText(id)
 // }
+
+function handleEdit(id: string) {
+  console.log(id)
+}
 </script>
 
 <template>
@@ -36,7 +40,9 @@ const props = defineProps<Props>()
     <DropdownMenuContent align="end">
       <DropdownMenuLabel>Acciones</DropdownMenuLabel>
 
-      <DropdownMenuItem> Editar </DropdownMenuItem>
+      <DropdownMenuItem @click="handleEdit(props.payment.id)">
+        Editar
+      </DropdownMenuItem>
 
       <DropdownMenuItem>Eliminar</DropdownMenuItem>
     </DropdownMenuContent>

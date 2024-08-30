@@ -59,12 +59,12 @@ onMounted(async () => {
         </DialogTrigger>
       </div>
 
-      <DataTable
-        :columns="columns"
-        :data="data"
-      />
-
       <ProductDialog />
     </Dialog>
+
+    <DataTable
+      :columns="columns"
+      :data="data"
+    />
   </div>
 </template>
