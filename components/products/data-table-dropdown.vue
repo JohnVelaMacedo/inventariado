@@ -14,15 +14,16 @@ interface Props {
   }
 }
 
+type InjectProps = {
+  handleEditProduct: (productId: string) => void
+}
+
+const { handleEditProduct } = inject('productId') as InjectProps
 const props = defineProps<Props>()
 
 // function copy(id: string) {
 //   navigator.clipboard.writeText(id)
 // }
-
-function handleEdit(id: string) {
-  console.log(id)
-}
 </script>
 
 <template>
@@ -40,7 +41,7 @@ function handleEdit(id: string) {
     <DropdownMenuContent align="end">
       <DropdownMenuLabel>Acciones</DropdownMenuLabel>
 
-      <DropdownMenuItem @click="handleEdit(props.payment.id)">
+      <DropdownMenuItem @click="handleEditProduct(props.payment.id)">
         Editar
       </DropdownMenuItem>
 

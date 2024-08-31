@@ -2,6 +2,7 @@
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import z from 'zod'
+import { dataItems } from '~/data'
 import { Button } from '../ui/button'
 import {
   DialogClose,
@@ -18,7 +19,16 @@ import {
   FormMessage
 } from '../ui/form'
 
-const closeButton = ref<HTMLButtonElement | null>(null)
+type InjectProps = {
+  productId: Ref<string>
+}
+
+type ProductDialogEmits = {
+  handleOpenModal: [openModal: boolean]
+}
+
+const emits = defineEmits<ProductDialogEmits>()
+const { productId } = inject('productId') as InjectProps
 const formSchema = toTypedSchema(
   z.object({
     name: z
@@ -35,21 +45,33 @@ const formSchema = toTypedSchema(
   })
 )
 
-const { isFieldDirty, handleSubmit } = useForm({
+const { isFieldDirty, setValues, handleSubmit } = useForm({
   validationSchema: formSchema
 })
 
 const onSubmit = handleSubmit((values) => {
   // TODO: Hacer una petición POST para guardar
   console.log(values)
-  closeButton.value?.click()
+  emits('handleOpenModal', false)
+})
+
+watch(productId, (newId) => {
+  if (newId) {
+    const item = dataItems.find((data) => data.id === newId)
+    setValues({
+      name: item?.name,
+      price: item?.price
+    })
+  }
 })
 </script>
 
 <template>
   <DialogContent class="sm:max-w-[425px]">
     <DialogHeader>
-      <DialogTitle>Agregar Producto</DialogTitle>
+      <DialogTitle>
+        {{ productId ? 'Editar Producto' : 'Agregar Producto' }}
+      </DialogTitle>
     </DialogHeader>
 
     <form
@@ -103,7 +125,6 @@ const onSubmit = handleSubmit((values) => {
         <DialogClose as-child>
           <button
             class="bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            ref="closeButton"
             type="button"
           >
             Cerrar
