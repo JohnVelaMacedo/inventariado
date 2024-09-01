@@ -18,6 +18,7 @@ import {
   FormLabel,
   FormMessage
 } from '../ui/form'
+import { toast } from '../ui/toast'
 
 type InjectProps = {
   productId: Ref<string>
@@ -52,6 +53,12 @@ const { isFieldDirty, setValues, handleSubmit } = useForm({
 const onSubmit = handleSubmit((values) => {
   // TODO: Hacer una petición POST para guardar
   console.log(values)
+  toast({
+    title: 'Exitoso!',
+    description: productId.value
+      ? 'Registro actualizado correctamente'
+      : 'Registro creado correctamente'
+  })
   emits('handleOpenModal', false)
 })
 

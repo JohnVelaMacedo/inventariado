@@ -2,14 +2,18 @@
 import { PlusCircle } from 'lucide-vue-next'
 import { columns, type Payment } from '~/components/products/columns'
 import DataTable from '~/components/products/data-table.vue'
+import ProductDeleteDialog from '~/components/products/ProductDeleteDialog.vue'
 import ProductDialog from '~/components/products/ProductDialog.vue'
 import { Button } from '~/components/ui/button'
 import { Dialog, DialogTrigger } from '~/components/ui/dialog'
+import { Toaster } from '~/components/ui/toast'
 import { dataItems } from '~/data'
 
 const isOpen = ref(false)
+const isOpenAlertDelete = ref(false)
 const data = ref<Payment[]>([])
 const productId = ref('')
+const productIdDelete = ref('')
 
 function handleOpenModal(openModal: boolean) {
   isOpen.value = openModal
@@ -25,8 +29,18 @@ function handleEditProduct(id: string) {
   isOpen.value = true
 }
 
+function handleOpenModalDelete(id: string) {
+  isOpenAlertDelete.value = true
+  productIdDelete.value = id
+}
+
+function setOpenAlertDelete(isOpen: boolean) {
+  isOpenAlertDelete.value = isOpen
+  productIdDelete.value = ''
+}
+
 async function getData(): Promise<Payment[]> {
-  // Fetch data from your API here.
+  // TODO: Fetch data from your API here.
   return dataItems
 }
 
@@ -34,7 +48,11 @@ onMounted(async () => {
   data.value = await getData()
 })
 
-provide('productId', { productId, handleEditProduct })
+provide('productId', {
+  productId,
+  handleEditProduct,
+  handleOpenModalDelete
+})
 </script>
 
 <template>
@@ -63,5 +81,13 @@ provide('productId', { productId, handleEditProduct })
       :columns="columns"
       :data="data"
     />
+
+    <ProductDeleteDialog
+      :is-open-alert-delete="isOpenAlertDelete"
+      :product-id-delete="productIdDelete"
+      @setOpenAlertDelete="setOpenAlertDelete"
+    />
+
+    <Toaster />
   </div>
 </template>

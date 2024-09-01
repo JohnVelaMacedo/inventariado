@@ -16,10 +16,13 @@ interface Props {
 
 type InjectProps = {
   handleEditProduct: (productId: string) => void
+  handleOpenModalDelete: (productId: string) => void
 }
 
-const { handleEditProduct } = inject('productId') as InjectProps
 const props = defineProps<Props>()
+const { handleEditProduct, handleOpenModalDelete } = inject(
+  'productId'
+) as InjectProps
 
 // function copy(id: string) {
 //   navigator.clipboard.writeText(id)
@@ -45,7 +48,11 @@ const props = defineProps<Props>()
         Editar
       </DropdownMenuItem>
 
-      <DropdownMenuItem>Eliminar</DropdownMenuItem>
+      <DropdownMenuItem
+        @click="handleOpenModalDelete(props.payment.id)"
+      >
+        Eliminar
+      </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
 </template>
