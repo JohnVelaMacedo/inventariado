@@ -2,13 +2,13 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import DropdownAction from './data-table-dropdown.vue'
 
-export interface Payment {
+export interface Products {
   id: string
   name: string
   price: number
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Products>[] = [
   { accessorKey: 'name', header: 'Nombre' },
   {
     accessorKey: 'price',

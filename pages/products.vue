@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PlusCircle } from 'lucide-vue-next'
-import { columns, type Payment } from '~/components/products/columns'
+import { columns, type Products } from '~/components/products/columns'
 import DataTable from '~/components/products/data-table.vue'
 import ProductDeleteDialog from '~/components/products/ProductDeleteDialog.vue'
 import ProductDialog from '~/components/products/ProductDialog.vue'
@@ -11,7 +11,7 @@ import { dataItems } from '~/data'
 
 const isOpen = ref(false)
 const isOpenAlertDelete = ref(false)
-const data = ref<Payment[]>([])
+const data = ref<Products[]>([])
 const productId = ref('')
 const productIdDelete = ref('')
 
@@ -39,7 +39,7 @@ function setOpenAlertDelete(isOpen: boolean) {
   productIdDelete.value = ''
 }
 
-async function getData(): Promise<Payment[]> {
+async function getData(): Promise<Products[]> {
   // TODO: Fetch data from your API here.
   return dataItems
 }
