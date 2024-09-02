@@ -12,8 +12,6 @@ import {
 } from './ui/dropdown-menu'
 import { Input } from './ui/input'
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
-
-const route = useRoute()
 </script>
 
 <template>

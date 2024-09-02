@@ -12,34 +12,33 @@ import {
 import { toast } from '../ui/toast'
 
 type ProductDeleteDialogProps = {
-  isOpenAlertDelete: boolean
-  productIdDelete: string
+  openDialogDelete: boolean
+  productId: string
 }
 
 type ProductDeleteDialogEmits = {
-  setOpenAlertDelete: [isOpen: boolean]
+  handleToggleDeleteDialog: [openDialog: boolean]
 }
 
 const props = defineProps<ProductDeleteDialogProps>()
 const emit = defineEmits<ProductDeleteDialogEmits>()
 
 function handleCancel() {
-  console.log('handleCancel')
-  emit('setOpenAlertDelete', false)
+  emit('handleToggleDeleteDialog', false)
 }
 
 function handleDelete() {
-  console.log('handleDelete', props.productIdDelete)
   toast({
     title: 'Exitoso!',
-    description: 'Registro eliminado correctamente'
+    description: 'Registro eliminado correctamente',
+    duration: 2500
   })
   handleCancel()
 }
 </script>
 
 <template>
-  <AlertDialog :open="props.isOpenAlertDelete">
+  <AlertDialog :open="props.openDialogDelete">
     <AlertDialogContent>
       <AlertDialogHeader>
         <AlertDialogTitle>

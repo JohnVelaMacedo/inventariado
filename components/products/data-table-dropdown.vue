@@ -15,13 +15,19 @@ interface Props {
 }
 
 type InjectProps = {
-  handleEditProduct: (productId: string) => void
-  handleOpenModalDelete: (productId: string) => void
+  handleToggleDeleteDialog: (
+    openDialog: boolean,
+    productId?: string
+  ) => void
+  handleToggleProductModal: (
+    openModal: boolean,
+    productId?: string
+  ) => void
 }
 
 const props = defineProps<Props>()
-const { handleEditProduct, handleOpenModalDelete } = inject(
-  'productId'
+const { handleToggleDeleteDialog, handleToggleProductModal } = inject(
+  'productPage'
 ) as InjectProps
 
 // function copy(id: string) {
@@ -44,12 +50,14 @@ const { handleEditProduct, handleOpenModalDelete } = inject(
     <DropdownMenuContent align="end">
       <DropdownMenuLabel>Acciones</DropdownMenuLabel>
 
-      <DropdownMenuItem @click="handleEditProduct(props.payment.id)">
+      <DropdownMenuItem
+        @click="handleToggleProductModal(true, props.payment.id)"
+      >
         Editar
       </DropdownMenuItem>
 
       <DropdownMenuItem
-        @click="handleOpenModalDelete(props.payment.id)"
+        @click="handleToggleDeleteDialog(true, props.payment.id)"
       >
         Eliminar
       </DropdownMenuItem>
