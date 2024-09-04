@@ -12,7 +12,7 @@ import {
 import { toast } from '../ui/toast'
 
 type ProductDeleteDialogProps = {
-  openDialogDelete: boolean
+  openDeleteDialog: boolean
   productId: string
 }
 
@@ -38,7 +38,7 @@ function handleDelete() {
 </script>
 
 <template>
-  <AlertDialog :open="props.openDialogDelete">
+  <AlertDialog :open="props.openDeleteDialog">
     <AlertDialogContent>
       <AlertDialogHeader>
         <AlertDialogTitle>

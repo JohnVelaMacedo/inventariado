@@ -57,7 +57,7 @@ provide('productPage', {
     />
 
     <ProductDeleteDialog
-      :open-dialog-delete="openDeleteDialog"
+      :open-delete-dialog="openDeleteDialog"
       :product-id="productId"
       @handle-toggle-delete-dialog="handleToggleDeleteDialog"
     />
