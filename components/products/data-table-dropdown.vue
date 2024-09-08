@@ -52,12 +52,14 @@ const { handleToggleDeleteDialog, handleToggleProductModal } = inject(
 
       <DropdownMenuItem
         @click="handleToggleProductModal(true, props.payment.id)"
+        class="cursor-pointer"
       >
         Editar
       </DropdownMenuItem>
 
       <DropdownMenuItem
         @click="handleToggleDeleteDialog(true, props.payment.id)"
+        class="cursor-pointer"
       >
         Eliminar
       </DropdownMenuItem>
