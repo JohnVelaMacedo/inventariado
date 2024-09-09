@@ -33,3 +33,14 @@ export const dataItems = [
     price: 4
   }
 ]
+
+export const dataSellers = [
+  {
+    id: 'bhqecj4p',
+    name: 'Sergio Orlando Fung Vargas'
+  },
+  {
+    id: '5kma53ae',
+    name: 'Jhon Wagner Mendoza'
+  }
+]

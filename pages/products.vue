@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { columns, type Products } from '~/components/products/columns'
-import DataTable from '~/components/products/data-table.vue'
 import ProductDeleteDialog from '~/components/products/ProductDeleteDialog.vue'
 import ProductModal from '~/components/products/ProductModal.vue'
+import DataTable from '~/components/ui/data-table.vue'
 import { Toaster } from '~/components/ui/toast'
 import { dataItems } from '~/data'
 

@@ -32,7 +32,7 @@ const table = useVueTable({
 </script>
 
 <template>
-  <div class="">
+  <div class="border rounded-md">
     <Table>
       <TableHeader>
         <TableRow
@@ -70,7 +70,6 @@ const table = useVueTable({
             </TableCell>
           </TableRow>
         </template>
-
         <template v-else>
           <TableRow>
             <TableCell
