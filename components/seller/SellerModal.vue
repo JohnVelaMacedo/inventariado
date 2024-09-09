@@ -3,36 +3,44 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { PlusCircle } from 'lucide-vue-next'
 import { useForm } from 'vee-validate'
 import z from 'zod'
-import { dataItems } from '~/data'
+import { dataSellers } from '~/data'
 import { Button } from '../ui/button'
-import { Dialog, DialogTrigger } from '../ui/dialog'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '../ui/dialog'
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel
+} from '../ui/form'
+import { Input } from '../ui/input'
 import { toast } from '../ui/toast'
 
-type ProductModalProps = {
-  openProductModal: boolean
-  productId: string
+type SellerModalProps = {
+  openSellerModal: boolean
+  sellerId: string
 }
 
-type ProductModalEmits = {
-  handleToggleProductModal: [openModal: boolean, productId?: string]
+type SellerModalEmits = {
+  handleToggleSellerModal: [openModal: boolean, sellerId?: string]
 }
 
-const props = defineProps<ProductModalProps>()
-const emits = defineEmits<ProductModalEmits>()
+const props = defineProps<SellerModalProps>()
+const emits = defineEmits<SellerModalEmits>()
 
 const formSchema = toTypedSchema(
   z.object({
     name: z
       .string({ required_error: 'El campo Nombre es obligatorio' })
       .min(2, { message: 'Debe ser de 2 a más caracteres' })
-      .max(50, { message: 'Debe ser menos de 50 caracteres' }),
-    price: z
-      .number({
-        required_error: 'El campo Precio es obligatorio',
-        invalid_type_error: 'El campo Precio debe ser un número'
-      })
-      .positive({ message: 'Debe ser un número positivo' })
-      .safe()
+      .max(50, { message: 'Debe ser menos de 50 caracteres' })
   })
 )
 
@@ -41,15 +49,15 @@ const { isFieldDirty, setValues, handleSubmit } = useForm({
 })
 
 const label = computed(() => {
-  return props.productId ? 'Editar Producto' : 'Crear Producto'
+  return props.sellerId ? 'Editar Vendedor' : 'Crear Vendedor'
 })
 
 const onSubmit = handleSubmit((values) => {
   // TODO: Hacer una petición POST para guardar
-  console.log({ ...values, id: props.productId })
+  console.log({ ...values, id: props.sellerId })
   toast({
     title: 'Exitoso!',
-    description: props.productId
+    description: props.sellerId
       ? 'Registro actualizado correctamente'
       : 'Registro creado correctamente',
     duration: 2500
@@ -63,19 +71,20 @@ function handleUpdateOpenModal(openModal: boolean) {
 
 function handleToggleModal(
   openModal: boolean,
-  productId: string = ''
+  sellerId: string = ''
 ) {
-  emits('handleToggleProductModal', openModal, productId)
+  emits('handleToggleSellerModal', openModal, sellerId)
 }
 
 watch(
-  () => props.productId,
+  () => props.sellerId,
   (newProductId) => {
     if (newProductId) {
-      const item = dataItems.find((data) => data.id === newProductId)
+      const item = dataSellers.find(
+        (data) => data.id === newProductId
+      )
       setValues({
-        name: item?.name,
-        price: item?.price
+        name: item?.name
       })
     }
   }
@@ -85,17 +94,16 @@ watch(
 <template>
   <div class="text-right mb-2">
     <Dialog
-      :open="props.openProductModal"
+      :open="props.openSellerModal"
       @update:open="handleUpdateOpenModal"
     >
       <DialogTrigger asChild>
         <Button
           size="sm"
           variant="outline"
-          @click="handleToggleModal(true)"
         >
           <PlusCircle class="h-3.5 w-3.5 mr-2" />
-          Agregar Producto
+          Agregar Vendedor
         </Button>
       </DialogTrigger>
 
@@ -121,26 +129,6 @@ watch(
                 <Input
                   type="text"
                   placeholder="Nombre"
-                  v-bind="componentField"
-                />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          </FormField>
-
-          <FormField
-            v-slot="{ componentField }"
-            name="price"
-            :validate-on-blur="!isFieldDirty"
-          >
-            <FormItem>
-              <FormLabel>Precio</FormLabel>
-
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Precio"
                   v-bind="componentField"
                 />
               </FormControl>
