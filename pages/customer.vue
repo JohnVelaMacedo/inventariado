@@ -1,7 +1,25 @@
 <script setup lang="ts">
-import { Button } from '~/components/ui/button'
+import { columns, type Customer } from '~/components/customer/columns'
+import DataTable from '~/components/ui/data-table.vue'
+import { dataCustomers } from '~/data'
+
+const data = ref<Customer[]>([])
+
+async function getData(): Promise<Customer[]> {
+  // TODO: Fetch data from your API here.
+  return dataCustomers
+}
+
+onMounted(async () => {
+  data.value = await getData()
+})
 </script>
 
 <template>
-  <Button class="mt-4"> Add Customer </Button>
+  <div class="container py-10 mx-auto">
+    <DataTable
+      :columns="columns"
+      :data="data"
+    />
+  </div>
 </template>

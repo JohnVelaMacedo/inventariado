@@ -44,3 +44,18 @@ export const dataSellers = [
     name: 'Jhon Wagner Mendoza'
   }
 ]
+
+export const dataCustomers = [
+  {
+    id: 'bhqecj4p',
+    name: 'Sergio Orlando',
+    lastName: 'Fung Vargas',
+    numberDocument: '70379678'
+  },
+  {
+    id: '5kma53ae',
+    name: 'Jhon',
+    lastName: 'Wagner Mendoza',
+    numberDocument: '70379679'
+  }
+]
