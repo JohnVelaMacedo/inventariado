@@ -14,21 +14,20 @@ interface Props {
   }
 }
 
-// type InjectProps = {
-//   handleToggleDeleteDialog: (
-//     openDialog: boolean,
-//     productId?: string
-//   ) => void
-//   handleToggleProductModal: (
-//     openModal: boolean,
-//     productId?: string
-//   ) => void
-// }
+type InjectProps = {
+  handleToggleDeleteDialog: (
+    openDialog: boolean,
+    customerId?: string
+  ) => void
+  handleToggleCustomerModal: (
+    openModal: boolean,
+    customerId?: string
+  ) => void
+}
 
 const props = defineProps<Props>()
-// const { handleToggleDeleteDialog, handleToggleProductModal } = inject(
-//   'productPage'
-// ) as InjectProps
+const { handleToggleDeleteDialog, handleToggleCustomerModal } =
+  inject('customerPage') as InjectProps
 
 // function copy(id: string) {
 //   navigator.clipboard.writeText(id)
@@ -50,11 +49,17 @@ const props = defineProps<Props>()
     <DropdownMenuContent align="end">
       <DropdownMenuLabel>Acciones</DropdownMenuLabel>
 
-      <DropdownMenuItem class="cursor-pointer">
+      <DropdownMenuItem
+        class="cursor-pointer"
+        @click="handleToggleCustomerModal(true, props.payment.id)"
+      >
         Editar
       </DropdownMenuItem>
 
-      <DropdownMenuItem class="cursor-pointer">
+      <DropdownMenuItem
+        class="cursor-pointer"
+        @click="handleToggleDeleteDialog(true, props.payment.id)"
+      >
         Eliminar
       </DropdownMenuItem>
     </DropdownMenuContent>
